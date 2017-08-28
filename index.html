@@ -17,6 +17,7 @@
 				<p>As you can see, the eventlistener based on the button's id displayed a message.  It also called another function that stopped the button from listening to anymore clicks.</p>
 			</div>
 		</div>
+		<hr>
 		<div class="row">
 			<div class="col-xs-5 text-center">
 				<h3>Functions reverseFunction and showHidden</h3>
@@ -25,7 +26,7 @@
 			<div class="col-xs-offset-1 col-xs-5 text-center">
 				<div id="inputDiv">
 					<input type = "text" id = "yourInput">
-					<button class="btn btn-danger" id = "reverseButton" data-set = "reverse-now">Reverse it!</button>
+					<button class="btn btn-danger" id = "reverseButton">Reverse it!</button>
 				</div>
 				<p id = "hiddenParagraph">Pretty cool, huh?  Notice, we also with javascript created a new element to be added to the body of the webpage.</p>
 			</div>
@@ -39,8 +40,11 @@
 			<div class="col-xs-offset-1 col-xs-5 text-center">
 				<div id="inputDiv">
 					<input type = "text" id = "yourPalindrome">
-					<button class="btn btn-danger"  id = "palindromeButton" data-set = "check-pali">Reverse it!</button>
+					<button class="btn btn-info"  id = "palindromeButton">Check for palindrome</button>
 				</div>
+				<p  class = "pali" id = "palindromeMsg0">You did not enter anything.  Please type something.</p>
+				<p class = "pali" id = "palindromeMsg1">SUCCESS!  This is indeed a palindrome!  Good job!</p>
+				<p class = "pali" id = "palindromeMsg2">Sorry.  This is not a palindrome.  Better luck next time.</p>
 			</div>
 		</div>
 	</div>

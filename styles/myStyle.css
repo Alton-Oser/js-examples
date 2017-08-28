@@ -15,11 +15,29 @@ span {
 	font-size: 1.5em;
 }
 
-
+#eventButton {
+	margin-bottom: 5%;
+}
 
 #hiddenParagraph {
 	padding: 3%;
 	visibility: hidden;
+}
+
+.pali {
+	padding: 3%;
+	display: none;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+#palindromeMsg0 {
+	color: orange;
+}
+#palindromeMsg1 {
+	color: green;
+}
+#palindromeMsg2 {
+	color: red;
 }
 #reverseAdded {
 	padding-top: 1%;

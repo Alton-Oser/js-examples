@@ -1,72 +1,95 @@
-
-	//var reverse;
-
 //function startUp() {
 	
-	document.getElementById("eventButton").addEventListener("click", listenFunction);
-	document.getElementById("palindromeButton").addEventListener("click", reverseFunction);
-	document.getElementById("reverseButton").addEventListener("click", reverseFunction);
+	var eBtn = document.getElementById("eventButton");
+	var pBtn = document.getElementById("palindromeButton");
+	var rBtn = document.getElementById("reverseButton");
 
-
-
+	eBtn.addEventListener("click", listenFunction);
+	
+	// 1 is a flag needed in reverseFunction that the function palindrome calls inside the function
+	pBtn.addEventListener("click", function() 
+		{palindrome(document.getElementById("yourPalindrome").value, 1)});
+	
+	document.getElementById("yourPalindrome")
+		.addEventListener("keyup", function(event) {
+		event.preventDefault();
+		if (event.keyCode == 13) {
+			pBtn.click();
+		}
+	});
+		
+	//event listener passes function by reference; this way, it doesn't call fn to execute
+	rBtn.addEventListener("click", function()
+		{reverseFunction(document.getElementById("yourInput").value)}); 
+		
+	document.getElementById("yourInput")
+		.addEventListener("keyup", function(event) {
+		event.preventDefault();
+		if (event.keyCode == 13) {
+			rBtn.click();
+		}
+	});
 function listenFunction() {
 	alert("I heard you.");
 	deafFunction();
 }
 function deafFunction() {
-	document.getElementById("eventButton").removeEventListener("click", listenFunction);
+	eBtn.removeEventListener("click", listenFunction);
 	alert("But now I'm no longer listening");
-	document.getElementById("eventButton").innerText="Not Listening";
+	eBtn.innerText="Not Listening";
 }
 
-function reverseFunction(msg) {
+function reverseFunction(toChange, test) {
 	var changeOrder = [];
-	var toChange = document.getElementById("yourInput").value;
 	changeOrder = toChange.split("").reverse().join("");
-	addReverse(changeOrder);	
+	if (test !== 1) {
+	addReverse(changeOrder);
+	} else {
+		return changeOrder; //return it to function palindrome - where it was called from
+	}
 }
 	
-function addReverse(changeHere) {	
-	var addTo = document.getElementById("hiddenParagraph");
-	var newDiv = document.createElement("DIV");
-	var newBreak = document.createElement("BR");
-	newDiv.appendChild(document.createTextNode("Your input in reverse:  "));
-	newDiv.appendChild(newBreak);
-	newDiv.appendChild(document.createTextNode(changeHere));
-	addTo.appendChild(newDiv);
-	newDiv.setAttribute('id', 'reverseAdded');
-	showHidden();
+function addReverse(changeHere) {
+	if(document.contains(document.getElementById("reverseAdded"))) {
+		document.getElementById("reverseAdded").innerHTML = ("Your input in reverse:  " + "<br/>" + changeHere);
+	} else {
+		var addTo = document.getElementById("hiddenParagraph");
+		var newDiv = document.createElement("DIV");
+		var newBreak = document.createElement("BR");
+		newDiv.appendChild(document.createTextNode("Your input in reverse:  "));
+		newDiv.appendChild(newBreak);
+		newDiv.appendChild(document.createTextNode(changeHere));
+		addTo.appendChild(newDiv);
+		newDiv.setAttribute('id', 'reverseAdded');
+		showHidden();
+	}
 }
 
 function showHidden() {
 	document.getElementById("hiddenParagraph").style.visibility="visible";
 }
 
-/*  This works well 
-************************************************/
-
-
-function palindrome(str) {
+function palindrome(str, test) {
+	
   var newStr = str.replace(/[^a-z0-9]/gi,'');
   newStr = newStr.toLowerCase();
   var newStr1 = newStr;
-  var orderChanged = reverseFunction(newStr1);
-  if (newStr == orderChanged) {
-    return true;
+  var orderChanged = reverseFunction(newStr1, 1);
+	if (newStr === "") {
+		document.getElementById("palindromeMsg0").style.display="block";
+		document.getElementById("palindromeMsg1").style.display= "none";
+		document.getElementById("palindromeMsg2").style.display= " none";
+	}
+	else if (newStr == orderChanged) {
+		document.getElementById("palindromeMsg0").style.display="none";
+		document.getElementById("palindromeMsg1").style.display="block";
+		document.getElementById("palindromeMsg2").style.display="none";
   } else {
-    return false;
+		document.getElementById("palindromeMsg0").style.display="none";
+		document.getElementById("palindromeMsg2").style.display="block";
+		document.getElementById("palindromeMsg1").style.display="none";
   }
 }
-
-/*
-function reverseFunction(strToTest) {
-	var changeOrder = [];
-	changeOrder = strToTest.split("").reverse().join("");
-  return changeOrder;
-}
-*/
-
-
 
 findLongestWord("What if we try a super-long word such as otorhinolaryngology");
 
