@@ -13,7 +13,7 @@
 				<p>The first one is to demonstrate the use of an event listener in js.  Click on the button to the right and it will provide a message due to the eventlistener.</p>
 			</div>
 			<div class="col-xs-offset-1 col-xs-5 text-center">
-				<button class="btn btn-primary btn-lg" id="eventButton">I'm Listening</button>
+				<button class="btn btn-primary btn-lg" id="eventButton">I'm Listening</button> 
 				<p>As you can see, the eventlistener based on the button's id displayed a message.  It also called another function that stopped the button from listening to anymore clicks.</p>
 			</div>
 		</div>
@@ -45,6 +45,105 @@
 				<p  class = "pali" id = "palindromeMsg0">You did not enter anything.  Please type something.</p>
 				<p class = "pali" id = "palindromeMsg1">SUCCESS!  This is indeed a palindrome!  Good job!</p>
 				<p class = "pali" id = "palindromeMsg2">Sorry.  This is not a palindrome.  Better luck next time.</p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class = "col-xs-5 text-center">
+			<h3>Function Find Longest Word</h3>
+				<p>This next function takes an input from the user and returns the longest word.</p>
+			</div>
+			<div class="col-xs-offset-1 col-xs-5 text-center">
+				<div id="phrase">
+					<input type = "text" id = "yourPhrase">
+					<button class="btn btn-success" id = "phraseButton">Longest word is:</button>
+					<p id = "revealLongest">Your longest word is:    </p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-5 text-center">
+			<h3>Function titleCase</h3>
+				<p>This function will take a sentence and capitalize the first letter of each word.</p>
+			</div>
+			<div class="col-xs-offset-1 col-xs-5 text-center">
+				<input type = "text" id = "capitalizeIt">
+				<button class="btn btn-info" id = "capButton">Capitalize!</button>
+				<p id = "showCaps"></p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-5 text-center">
+			<h3>Function largestOfTwo</h3>
+				<p>This function will take your input of numbers and return the largest of each of them.  Input as many numbers in each block as you like, separating each number with a space.</p>
+			</div>
+			<div class="col-xs-offset-1 col-xs-5 text-center">
+				<input type = "text" id = "firstArray"><br/><br/>
+				<input type = "text" id = "secondArray"><br><br/>
+				<button class="btn btn-info" id = "grabArrayButton">Large Number Array</button>
+				<p id = "showArray"></p>
+			</div>
+		</div>
+		<hr>
+		<div class = "row">
+			<div class = "col-xs-5 text-center">
+			<h3>Function confirmEnding</h3>
+				<p>This function will determine if your first input ends with your second input.</p>
+			</div>
+			<div class = "col-xs-offset-1 col-xs-5 text-center">
+				<label>Your sentence/phrase</label>
+				<input type = "text" id = "completePhrase"><br/><br/>
+				<label>Your possible ending</label>
+				<input type = "text" id = "ending"><br/><br/>
+				<button class = "btn btn-info" id = "findEndingButton">Does it end with?</button>
+				<p id = "showTorF"></p>
+			</div>
+		</div>
+		<hr>
+		<div class = "row">
+			<div class = "col-xs-5 text-center">
+			<h3>Function repeatStringNumTimes</h3>
+				<p>This function will repeat your first input based on the number you put in the second input.</p>
+			</div>
+			<div class = "col-xs-offset-1 col-xs-5 text-center">
+				<label>Your sentence/phrase</label>
+				<input type = "text" id = "strToRepeat"><br/><br/>
+				<label>How many times you want it repeated</label>
+				<input type = "text" id = "howManyTimes"><br/><br/>
+				<button class = "btn btn-info" id = "repeatButton">Repeat it</button>
+				<p id = "repeatString"></p>
+			</div>
+		</div>
+		<hr>
+		<div class = "row">
+			<div class = "col-xs-5 text-center">
+			<h3>Function truncateString</h3>
+				<p>This function will shorten your first input if it is longer than the number you put as your second input.</p>
+			</div>
+			<div class = "col-xs-offset-1 col-xs-5 text-center">
+				<label>Your sentence/phrase</label>
+				<input type = "text" id = "strToTruncate"><br/><br/>
+				<label>How long should it be?</label>
+				<input type = "text" id = "howShort"><br/><br/>
+				<button class = "btn btn-info" id = "truncButton">Truncate it</button>
+				<p id = "truncString"></p>
+			</div>
+		</div>
+		<hr>
+		<div class = "row">
+			<div class = "col-xs-5 text-center">
+			<h3>Function chunk</h3>
+				<p>This function will break up an array that you input in the first block into chunks based on your second input.</p>
+			</div>
+			<div class = "col-xs-offset-1 col-xs-5 text-center">
+				<label>Your array</label>
+				<input type = "text" id = "arrayToChunk"><br/><br/>
+				<label>How many of these in their own array?</label>
+				<input type = "text" id = "chunkSize"><br/><br/>
+				<button class = "btn btn-info" id = "chunkButton">Chunk it</button>
+				<p id = "finalChunk"></p>
 			</div>
 		</div>
 	</div>
