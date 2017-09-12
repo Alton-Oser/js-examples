@@ -19,7 +19,7 @@ span {
 	margin-bottom: 5%;
 }
 
-#hiddenParagraph {
+#hiddenParagraph, #showCaps, #showArray, #showTorF {
 	padding: 3%;
 	visibility: hidden;
 }

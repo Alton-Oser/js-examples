@@ -1,34 +1,60 @@
-//function startUp() {
-	
-	var eBtn = document.getElementById("eventButton");
-	var pBtn = document.getElementById("palindromeButton");
-	var rBtn = document.getElementById("reverseButton");
 
-	eBtn.addEventListener("click", listenFunction);
+	var eBtn = document.getElementById("eventButton");
+	eBtn.addEventListener("click", listenFunction); //for eventButton...I'm listening
+
+	buttons = document.getElementsByTagName("button");
+	enterKey = document.getElementsByTagName("input");
+
+	for (var i=0; i<buttons.length; i++) {
+		buttons[i].addEventListener("click", redirect, false);
+	}
+	for (var j=0; j<enterKey.length; j++) {
+		enterKey[j].addEventListener("keyup", redirect, false);
+	}
 	
-	// 1 is a flag needed in reverseFunction that the function palindrome calls inside the function
-	pBtn.addEventListener("click", function() 
-		{palindrome(document.getElementById("yourPalindrome").value, 1)});
-	
-	document.getElementById("yourPalindrome")
-		.addEventListener("keyup", function(event) {
-		event.preventDefault();
-		if (event.keyCode == 13) {
-			pBtn.click();
+	function redirect(ev){
+		if(ev.keyCode == 13) {
+			if (ev.target.id == "yourInput") {
+				reverseFunction(document.getElementById("yourInput").value);
+			} else if(ev.target.id == "yourPalindrome") {
+				palindrome(document.getElementById("yourPalindrome").value, 1);
+			} else if (ev.target.id == "yourPhrase") {
+				findLongestWord(document.getElementById("yourPhrase").value);
+			} else if (ev.target.id == "capitalizeIt") {
+				titleCase(document.getElementById("capitalizeIt").value);
+			} else if (ev.target.id == "secondArray") {
+				largestOfTwo(document.getElementById("firstArray").value, document.getElementById("secondArray").value);
+			} else if (ev.target.id == "ending") {
+				confirmEnding(document.getElementById("completePhrase").value, document.getElementById("ending").value);
+			} else if (ev.target.id == "howManyTimes") {
+				repeatStringNumTimes(document.getElementById("strToRepeat").value, document.getElementById("howManyTimes").value);
+			} else if (ev.target.id == "howShort") {
+				truncateString(document.getElementById("strToTruncate").value, document.getElementById("howShort").value);
+			} else if (ev.target.id == "chunkSize") {
+				chunk(document.getElementById("arrayToChunk").value, document.getElementById("chunkSize").value);
+			}
 		}
-	});
-		
-	//event listener passes function by reference; this way, it doesn't call fn to execute
-	rBtn.addEventListener("click", function()
-		{reverseFunction(document.getElementById("yourInput").value)}); 
-		
-	document.getElementById("yourInput")
-		.addEventListener("keyup", function(event) {
-		event.preventDefault();
-		if (event.keyCode == 13) {
-			rBtn.click();
+		if (ev.target.id == "palindromeButton") {
+			palindrome(document.getElementById("yourPalindrome").value, 1);
+		} else if (ev.target.id == "reverseButton") {
+			reverseFunction(document.getElementById("yourInput").value);
+		} else if (ev.target.id == "phraseButton") {
+			findLongestWord(document.getElementById("yourPhrase").value);
+		} else if (ev.target.id == "capButton") {
+			titleCase(document.getElementById("capitalizeIt").value);
+		} else if (ev.target.id == "grabArrayButton") {
+			largestOfTwo(document.getElementById("firstArray").value, document.getElementById("secondArray").value);
+		} else if (ev.target.id == "findEndingButton") {
+			confirmEnding(document.getElementById("completePhrase").value, document.getElementById("ending").value);
+		} else if (ev.target.id == "repeatButton") {
+			repeatStringNumTimes(document.getElementById("strToRepeat").value, document.getElementById("howManyTimes").value);
+		} else if (ev.target.id == "truncButton") {
+			truncateString(document.getElementById("strToTruncate").value, document.getElementById("howShort").value);
+		} else if (ev.target.id == "chunkButton") {
+			chunk(document.getElementById("arrayToChunk").value, document.getElementById("chunkSize").value);
 		}
-	});
+	}
+
 function listenFunction() {
 	alert("I heard you.");
 	deafFunction();
@@ -91,36 +117,60 @@ function palindrome(str, test) {
   }
 }
 
-findLongestWord("What if we try a super-long word such as otorhinolaryngology");
-
 function findLongestWord(str) {
   var newStr = str.split(" ");
   var longest = 0;
   for (var i=0; i < newStr.length; i++) { //read in each word	  
 	  if (newStr[i].length > longest) { //see how long each word is
 		  longest = newStr[i].length;
+		  var longWord = newStr[i];
 	  }
   }
-  //console.log(longest);
-  return longest;
+  var lWord = document.getElementById("revealLongest");
+  if (longWord == null) {
+    lWord.innerHTML = "You failed to type something in the space provided.";
+  } else {
+	  lWord.innerHTML = longWord;
+  }
 }
 
 //findLongestWord("The quick brown fox jumped over the lazy dog");
 
 function titleCase(str) {
-  var newStr = str.toLowerCase().split(" "); // splits the string and makes all letters lower case
-  for (var i=0; i < newStr.length; i++) { //cycles through each word in the newStr
-	//newStr[i] is each word; substring(1) is the indes for the second char and beyond 
-    newStr[i] = newStr[i].charAt(0).toUpperCase() + newStr[i].substring(1);
-  }
-  var capital = newStr.join(' ');
-  return capital;
-
+	var theCaps = document.getElementById("showCaps");
+    theCaps.style.visibility="visible";
+	if(str=="") {
+		theCaps.innerText = "You failed to type something in the space provided.";
+	} else {
+		var newStr = str.toLowerCase().split(" "); // splits the string and makes all letters lower case
+		for (var i=0; i < newStr.length; i++) { //cycles through each word in the newStr
+		//newStr[i] is each word; substring(1) is the indes for the second char and beyond 
+		newStr[i] = newStr[i].charAt(0).toUpperCase() + newStr[i].substring(1);
+		}
+		var capital = newStr.join(' ');
+		theCaps.innerText = capital;
+		return capital;
+	}
 }
 
-titleCase("i'm a little tea pot");
+//titleCase("i'm a little tea pot");
 
+function largestOfTwo(arr, arr1) {
+  var otherArray = [];
+  var largeList = [];
+  otherArray[0] = arr.split(" ");
+  otherArray[1] = arr1.split(" ");
 
+  largeList.push(Math.max.apply(null, otherArray[0]));//apply passes an array as a parameter
+  largeList.push(Math.max.apply(null, otherArray[1]));//null is used in place of this
+  var theArray = document.getElementById("showArray");
+  theArray.style.visibility="visible";
+  theArray.innerText = "Your two largest numbers are: " + largeList.join(" and ");
+	
+  return largeList; 
+}
+// largestOfFour([[4, 5, 1, 8], [53, 18, 26], [132, 35, 40, 39], [1], [33, 876, 23, 7]]);
+/*
 function largestOfFour(arr) {
   var largeList = [];
   for (var i = 0; i < arr.length; i++) {
@@ -135,28 +185,29 @@ function largestOfFour(arr) {
   console.log(largeList);
   return largeList;
 }
-
-largestOfFour([[4, 5, 1, 8], [53, 18, 26], [132, 35, 40, 39], [1], [33, 876, 23, 7]]);
-
+*/
 
 function confirmEnding(str, target) {
   var newStr = str.split('').join('');
   var n = target.length;
   var ending = target.substr(0, n);
   var newStrEnd = newStr.substr(-n); //the negative starts from the last of the string and works to the left
-  
+  var endingTest = document.getElementById("showTorF");
+  endingTest.style.visibility="visible";
   if (ending === newStrEnd) {
-    return true;
+      endingTest.innerText = "You are in luck! \"" + newStr + "\" ends with \"" + ending + "\"";
   } else {
-    return false;
+      endingTest.innerText = "Sorry! \"" + newStr + "\" does not end with \"" + ending + "\"";
+
   }
 }
 
-confirmEnding("Bastian", "stian");
+//confirmEnding("Bastian", "stian");
 
 
 function repeatStringNumTimes(str, num) {
   // repeat after me
+  var repeat = document.getElementById("repeatString");
   if (num < 0) {
     str = "";
   } else {
@@ -165,13 +216,15 @@ function repeatStringNumTimes(str, num) {
         str = str + newStr;
       }
   }
+  repeat.innerText = str;
   return str;
 }
 
-repeatStringNumTimes("abc", -1);
+//repeatStringNumTimes("abc", -1);
 
 
 function truncateString(str, num) { 
+	var trunk = document.getElementById("truncString");
     if (num >= str.length) {
       str1 = str;
     } else if (str.length > num && num >= 3) {
@@ -179,14 +232,32 @@ function truncateString(str, num) {
     } else {
       str1 = str.slice(0, num) + "...";
     }
+	trunk.innerText = str1;
   return str1;
 }
 
-truncateString("A-tisket a-tasket A green and yellow basket", 11);
+//truncateString("A-tisket a-tasket A green and yellow basket", 11);
 
 
 function chunk(array, size) {
-  var result = []
+  var brokenArray = document.getElementById("finalChunk");
+  var results = [];
+  var arr1 = array.split(" ");
+  var actualSize = parseInt(size);
+    for (var i=0;i<arr1.length;i+=actualSize) {
+    results.push( arr1.slice(i,i+actualSize) )
+  }
+	console.log(results);
+	for (var i=0; i<results.length; i++) {
+		brokenArray.innerText = brokenArray.innerText + " / " + results[i];
+	}
+	
+  return results
+  }
+  
+/*  
+  function chunk1(array, size) {
+  var result = [];
   for (var i=0;i<array.length;i+=size) {
     result.push( array.slice(i,i+size) )
   }
@@ -194,9 +265,9 @@ function chunk(array, size) {
   return result
   }
   
-chunk(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"], 3);
+chunk1(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"], 3);
 
-
+*/
 
 
 
